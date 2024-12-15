@@ -1,0 +1,89 @@
+---
+title: 'Create Session'
+description: 'Create a new sandbox session'
+api: 'POST /api/sessions'
+---
+
+## Create a New Session
+
+Creates a new sandbox session with specified environment type and configuration.
+
+### Parameters
+
+<ParamField query="env_type" type="string" default="browser" required>
+  The type of environment to create. Valid values are:
+  - `browser`: Creates a sandboxed browser environment
+  - `desktop`: Creates a sandboxed desktop environment
+</ParamField>
+
+<ParamField query="resolution" type="string" default="1200x800x24">
+  The screen resolution for the sandbox environment in format `WIDTHxHEIGHTxDEPTH`
+</ParamField>
+
+<ParamField query="tag" type="string">
+  Optional tag for session identification and organization
+</ParamField>
+
+### Response
+
+<ResponseField name="session_id" type="string">
+  Unique identifier for the created session
+</ResponseField>
+
+<ResponseField name="container_id" type="string">
+  Docker container ID associated with the session
+</ResponseField>
+
+<ResponseField name="vnc_port" type="integer">
+  Port number for VNC connection
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of session creation
+</ResponseField>
+
+<ResponseField name="env_type" type="string">
+  Type of environment (`browser` or `desktop`)
+</ResponseField>
+
+<ResponseField name="debug_port" type="integer">
+  Debug port number (only for browser environment)
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Current session status (`running`)
+</ResponseField>
+
+<ResponseField name="websocket_url" type="string">
+  WebSocket URL for browser debugging (only for browser environment)
+</ResponseField>
+
+### Example Request
+
+```bash
+curl -X POST "http://localhost:8000/api/sessions?env_type=browser&resolution=1920x1080x24&tag=Development"
+```
+
+### Example Response
+
+```json
+{
+  "session_id": "abc123xyz",
+  "container_id": "abc123xyz789",
+  "vnc_port": 5002,
+  "created_at": "2024-12-14T10:30:00Z",
+  "env_type": "browser",
+  "debug_port": 4002,
+  "status": "running",
+  "resolution": "1920x1080x24",
+  "tag": "Development",
+  "websocket_url": "ws://localhost:4002/devtools/browser/abc123xyz"
+}
+```
+
+### Error Responses
+
+| Status Code | Description |
+|------------|-------------|
+| 400 | Invalid environment type specified |
+| 500 | Failed to create container or initialize session |

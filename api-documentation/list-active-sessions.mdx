@@ -1,0 +1,89 @@
+---
+title: 'List Sessions'
+description: 'Retrieve all active sessions'
+api: 'GET /api/sessions'
+---
+
+## List Active Sessions
+
+Returns a list of all currently active sessions.
+
+### Response
+
+Returns an array of session objects, each containing:
+
+<ResponseField name="session_id" type="string">
+  Unique identifier for the session
+</ResponseField>
+
+<ResponseField name="container_id" type="string">
+  Docker container ID associated with the session
+</ResponseField>
+
+<ResponseField name="vnc_port" type="integer">
+  Port number for VNC connection
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of session creation
+</ResponseField>
+
+<ResponseField name="env_type" type="string">
+  Type of environment (`browser` or `desktop`)
+</ResponseField>
+
+<ResponseField name="debug_port" type="integer">
+  Debug port number (only for browser environment)
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Current session status (`running`)
+</ResponseField>
+
+<ResponseField name="runtime_seconds" type="number">
+  Current runtime duration in seconds
+</ResponseField>
+
+<ResponseField name="tag" type="string">
+  Custom tag assigned to the session (if any)
+</ResponseField>
+
+### Example Request
+
+```bash
+curl "http://localhost:8000/api/sessions"
+```
+
+### Example Response
+
+```json
+[
+  {
+    "session_id": "abc123xyz",
+    "container_id": "abc123xyz789",
+    "vnc_port": 5002,
+    "created_at": "2024-12-14T10:30:00Z",
+    "env_type": "browser",
+    "debug_port": 4002,
+    "status": "running",
+    "runtime_seconds": 3600,
+    "tag": "Development"
+  },
+  {
+    "session_id": "def456uvw",
+    "container_id": "def456uvw123",
+    "vnc_port": 5004,
+    "created_at": "2024-12-14T11:00:00Z",
+    "env_type": "desktop",
+    "status": "running",
+    "runtime_seconds": 1800,
+    "tag": "Testing"
+  }
+]
+```
+
+### Error Responses
+
+| Status Code | Description |
+|------------|-------------|
+| 500 | Internal server error |

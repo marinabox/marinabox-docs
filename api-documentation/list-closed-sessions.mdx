@@ -1,0 +1,79 @@
+---
+title: 'List Closed Sessions'
+description: 'Retrieve all closed sessions'
+api: 'GET /api/sessions/closed'
+---
+
+## List Closed Sessions
+
+Returns a list of all sessions that have been stopped.
+
+### Response
+
+Returns an array of closed session objects, each containing:
+
+<ResponseField name="session_id" type="string">
+  Unique identifier for the session
+</ResponseField>
+
+<ResponseField name="container_id" type="string">
+  Docker container ID that was associated with the session
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of session creation
+</ResponseField>
+
+<ResponseField name="closed_at" type="string">
+  ISO 8601 timestamp when the session was stopped
+</ResponseField>
+
+<ResponseField name="env_type" type="string">
+  Type of environment that was used (`browser` or `desktop`)
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Final session status (`stopped`)
+</ResponseField>
+
+<ResponseField name="runtime_seconds" type="number">
+  Total runtime duration in seconds
+</ResponseField>
+
+<ResponseField name="video_path" type="string">
+  Path to the session recording video file (if available)
+</ResponseField>
+
+<ResponseField name="tag" type="string">
+  Custom tag that was assigned to the session (if any)
+</ResponseField>
+
+### Example Request
+
+```bash
+curl "http://localhost:8000/api/sessions/closed"
+```
+
+### Example Response
+
+```json
+[
+  {
+    "session_id": "xyz789abc",
+    "container_id": "xyz789abc456",
+    "created_at": "2024-12-13T10:00:00Z",
+    "closed_at": "2024-12-13T12:34:56Z",
+    "env_type": "browser",
+    "status": "stopped",
+    "runtime_seconds": 4500,
+    "video_path": "/path/to/video/xyz789abc.mp4",
+    "tag": "CompletedTask"
+  }
+]
+```
+
+### Error Responses
+
+| Status Code | Description |
+|------------|-------------|
+| 500 | Internal server error |

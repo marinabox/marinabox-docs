@@ -1,0 +1,44 @@
+The `stop` command in MarinaBox CLI is used to stop a running session using its session ID. This ensures that resources are released and the session is gracefully terminated.
+
+---
+
+## Command Syntax
+
+```bash
+mb local stop <SESSION_ID>
+```
+
+---
+
+## Description
+
+This command stops a specific active session identified by its `session_id`. It:
+1. Gracefully shuts down processes running within the sandbox.
+2. Releases allocated resources like memory and ports.
+3. Moves the session to the closed sessions list for historical tracking.
+
+---
+
+## Example Usage
+
+### Stop a Specific Session:
+```bash
+mb local stop abc123xyz
+```
+
+#### Example Output:
+```bash
+Session stopped successfully
+```
+
+If the session ID is invalid or the session is already stopped, an error message is displayed:
+```bash
+Failed to stop session
+```
+
+---
+
+## Notes
+
+- Use the `session_id` from the `list` command to ensure you're targeting the correct active session.
+- This command does not affect sessions that are already closed. Use the `list-closed` command to view stopped sessions.

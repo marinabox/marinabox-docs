@@ -1,0 +1,67 @@
+The `create` command in MarinaBox CLI is used to create a new session in a secure and isolated sandbox environment. This command supports multiple environment types and additional configuration options.
+
+---
+
+## Command Syntax
+
+```bash
+mb local create --env-type=<browser|desktop> [--resolution=<WIDTHxHEIGHTxDEPTH>] [--tag=<TAG>]
+```
+
+### Options:
+- `--env-type`: Specifies the type of environment for the session. Supported values:
+  - `browser`: Creates a sandboxed browser environment.
+  - `desktop`: Creates a sandboxed desktop environment.
+- `--resolution`: (Optional) Sets the resolution of the session in the format `WIDTHxHEIGHTxDEPTH`. Default is `1200x800x24`.
+- `--tag`: (Optional) Assigns a custom tag to the session for easier identification.
+
+---
+
+## Examples
+
+### 1. Create a Browser Session
+```bash
+mb local create --env-type=browser
+```
+This creates a browser session with default resolution and no tag.
+
+---
+
+### 2. Create a Desktop Session with Custom Resolution
+```bash
+mb local create --env-type=desktop --resolution=1920x1080x24
+```
+This creates a desktop session with a resolution of 1920x1080 and a depth of 24.
+
+---
+
+### 3. Create a Tagged Session
+```bash
+mb local create --env-type=desktop --tag=TestSession
+```
+This creates a desktop session with a custom tag `TestSession`.
+
+---
+
+## Command Behavior
+
+1. **Environment Validation**: Ensures the specified `env-type` is valid (`browser` or `desktop`).
+2. **Port Allocation**: Dynamically assigns ports for the sandbox environment to avoid conflicts.
+3. **Container Spin-Up**: Creates the sandbox environment using the specified options and returns session details upon success.
+
+---
+
+## Expected Output
+Upon successful execution, the command returns details of the created session in JSON format:
+
+```json
+{
+  "session_id": "abc123xyz",
+  "env_type": "browser",
+  "status": "running",
+  "resolution": "1200x800x24",
+  "tag": "TestSession"
+}
+```
+
+Use the session ID for subsequent commands to manage or view the session.

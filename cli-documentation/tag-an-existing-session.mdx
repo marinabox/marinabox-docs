@@ -1,0 +1,55 @@
+The  `tag` command in MarinaBox CLI is used to add or update a tag for a session. Tags help with session identification and categorization and can be applied to both running and closed sessions.
+
+---
+
+## Command Syntax
+
+```bash
+mb local tag <SESSION_ID> <TAG>
+```
+
+---
+
+## Description
+
+This command allows you to:
+- Assign a new tag to a session for better organization.
+- Update the tag of an existing session (running or closed).
+
+Tags are especially useful for grouping sessions based on use cases or workflows.
+
+---
+
+## Example Usage
+
+### Add a Tag to a Running Session:
+```bash
+mb local tag abc123xyz Development
+```
+
+### Update the Tag for a Closed Session:
+```bash
+mb local tag xyz789abc ArchivedSession
+```
+
+---
+
+## Example Output
+
+For a successful tagging operation:
+```bash
+Tag updated successfully
+```
+
+If the `session_id` is invalid or the session does not exist:
+```bash
+Session not found
+```
+
+---
+
+## Notes
+
+- Use the `session_id` from the `list` or `list-closed` command to ensure you're tagging the correct session.
+- Tags are optional but can significantly improve session tracking and organization.
+- This command works for both active and closed sessions.

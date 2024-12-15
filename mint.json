@@ -1,24 +1,81 @@
 {
-  "name": "Marinabox Documentation",
-  "logo": "./images/logo.svg",
-  "theme": {
-    "color": "#4CAF50",
-    "dark_mode": true
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "MarinaBox",
+  "logo": {
+    "dark": "/logo/logo.png",
+    "light": "/logo/logo.png"
   },
-  "structure": [
-    "introduction.mdx",
-    "quickstart.mdx",
-    {
-      "title": "CLI Documentation",
-      "path": "cli-documentation.mdx"
-    },
-    {
-      "title": "API Documentation",
-      "path": "api-documentation.mdx"
-    },
-    {
-      "title": "FAQ",
-      "path": "faq.mdx"
+  "favicon": "/favicon.svg",
+  "modeToggle": {
+    "default": "light",
+    "isHidden": true
+  },
+  "colors": {
+    "primary": "#1565C0",
+    "light": "#1976D2",
+    "dark": "#0D47A1",
+    "anchors": {
+      "from": "#0D47A1",
+      "to": "#1E88E5"
     }
-  ]
+  },
+  "topbarCtaButton": {
+    "name": "GitHub",
+    "url": "https://dashboard.marinabox.com"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Documentation",
+      "icon": "book-open-cover",
+      "url": "/"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Get Started",
+      "pages": [
+        "get-started/introduction",
+        "get-started/setup-and-installation"
+      ]
+    },
+    {
+      "group": "CLI Documentation",
+      "pages": [
+        "cli-documentation/create-a-session",
+        "cli-documentation/list-active-sessions",
+        "cli-documentation/describe-a-session",
+        "cli-documentation/stop-a-session",
+        "cli-documentation/list-closed-sessions",
+        "cli-documentation/tag-an-existing-session"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-documentation/create-a-session",
+        "api-documentation/list-active-sessions",
+        "api-documentation/describe-a-session",
+        "api-documentation/stop-a-session",
+        "api-documentation/list-closed-sessions",
+        "api-documentation/tag-an-existing-session"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/playwright-integration",
+        "guides/live-session-view-or-iframe-integration",
+        "guides/embedding-iframe"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/marinabox"
+  }
 }

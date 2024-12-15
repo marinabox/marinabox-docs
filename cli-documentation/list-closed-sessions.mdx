@@ -1,0 +1,62 @@
+The `list-closed` command in MarinaBox CLI is used to display all sessions that have been stopped. This command provides details about past sessions for review and auditing.
+
+---
+
+## Command Syntax
+
+```bash
+mb local list-closed
+```
+
+---
+
+## Description
+
+This command retrieves a list of all closed sessions, including the following details:
+- **Session ID**: Unique identifier for the session.
+- **Environment Type**: Type of environment (`browser` or `desktop`).
+- **Status**: Final status of the session (`stopped`).
+- **Resolution**: Resolution of the sandbox environment.
+- **Tag**: Custom tag assigned to the session (if any).
+- **Runtime Seconds**: Total runtime of the session before it was stopped.
+- **Closed At**: Timestamp indicating when the session was stopped.
+
+---
+
+## Example Usage
+
+### Basic Command:
+```bash
+mb local list-closed
+```
+
+#### Example Output:
+```json
+[
+  {
+    "session_id": "xyz789abc",
+    "env_type": "browser",
+    "status": "stopped",
+    "resolution": "1920x1080x24",
+    "tag": "CompletedTask",
+    "runtime_seconds": 4500,
+    "closed_at": "2024-12-13T12:34:56Z"
+  },
+  {
+    "session_id": "uvw123def",
+    "env_type": "desktop",
+    "status": "stopped",
+    "resolution": "1200x800x24",
+    "tag": "TestSession",
+    "runtime_seconds": 600,
+    "closed_at": "2024-12-13T13:45:00Z"
+  }
+]
+```
+
+---
+
+## Notes
+
+- Use this command to review all past sessions and their metadata.
+- Combine with the `get-closed` command to retrieve specific details about a particular closed session.

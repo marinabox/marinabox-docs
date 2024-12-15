@@ -1,0 +1,68 @@
+---
+title: 'Playwright Integration'
+description: 'Get started with connecting to MarinaBox browser sessions using Playwright'
+---
+
+# Basic Connection Example
+
+After creating a browser session with MarinaBox, you can connect to it using Playwright. This guide shows you how to write a simple script to connect and interact with the browser session.
+
+## Getting Session Details
+
+First, list your active sessions to get the WebSocket URL:
+
+```bash
+mb local list
+```
+
+You'll see output like this:
+
+```json
+{
+  "session_id": "a963accd3608",
+  "websocket_url": "ws://127.0.0.1:4002/devtools/browser/91d7ff24-7c83-4203-94d5-b11d20029d26",
+  "status": "running"
+  // ... other fields
+}
+```
+
+## Python Script
+
+Here's a complete example showing how to connect to the session:
+
+```python
+from playwright.sync_api import sync_playwright
+
+def main():
+    # WebSocket URL from 'mb local list' command
+    cdp_ws_url = "ws://127.0.0.1:4002/devtools/browser/91d7ff24-7c83-4203-94d5-b11d20029d26"
+
+    with sync_playwright() as p:
+        # Connect to the existing browser session
+        browser = p.chromium.connect_over_cdp(cdp_ws_url)
+        
+        # Get or create browser context
+        contexts = browser.contexts
+        context = contexts[0] if contexts else browser.new_context()
+
+        # Create a new page
+        page = context.new_page()
+
+        # Navigate to a website
+        page.goto("https://google.com")
+        print(f"Page title: {page.title()}")
+
+        # Clean up
+        context.close()
+
+if __name__ == "__main__":
+    main()
+```
+
+That's it! This script:
+1. Connects to your running browser session
+2. Opens a new page
+3. Navigates to a website
+4. Closes the connection
+
+You can use this as a starting point for more complex browser automation tasks.

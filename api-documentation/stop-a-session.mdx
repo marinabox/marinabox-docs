@@ -1,0 +1,45 @@
+---
+title: 'Stop Session'
+description: 'Stop a running session'
+api: 'DELETE /api/sessions/{session_id}'
+---
+
+## Stop Session
+
+Stops a running session and moves it to the closed sessions list.
+
+### Parameters
+
+<ParamField path="session_id" type="string" required>
+  The unique identifier of the session to stop
+</ParamField>
+
+### Behavior
+
+When stopping a session, the following actions occur:
+1. Gracefully stops the ffmpeg recording process
+2. Saves the session recording video file
+3. Stops and removes the Docker container
+4. Updates session status and calculates final runtime
+5. Moves session to closed sessions list
+
+### Example Request
+
+```bash
+curl -X DELETE "http://localhost:8000/api/sessions/abc123xyz"
+```
+
+### Example Response
+
+```json
+{
+  "status": "success"
+}
+```
+
+### Error Responses
+
+| Status Code | Description |
+|------------|-------------|
+| 404 | Session not found |
+| 500 | Failed to stop session |

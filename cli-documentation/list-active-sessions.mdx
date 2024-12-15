@@ -1,0 +1,56 @@
+The `list` command in MarinaBox CLI is used to display all currently active sessions. This command helps track ongoing sessions and their details.
+
+---
+
+## Command Syntax
+
+```bash
+mb local list
+```
+
+---
+
+## Description
+
+This command retrieves a list of all active sessions, providing the following details for each session:
+- **Session ID**: Unique identifier for the session.
+- **Environment Type**: Type of environment (`browser` or `desktop`).
+- **Status**: Current status of the session (`running`).
+- **Resolution**: Resolution of the sandbox environment.
+- **Tag**: Custom tag assigned to the session (if any).
+
+---
+
+## Example Usage
+
+### Basic Command:
+```bash
+mb local list
+```
+
+#### Example Output:
+```json
+[
+  {
+    "session_id": "abc123xyz",
+    "env_type": "browser",
+    "status": "running",
+    "resolution": "1920x1080x24",
+    "tag": "Development"
+  },
+  {
+    "session_id": "def456uvw",
+    "env_type": "desktop",
+    "status": "running",
+    "resolution": "1200x800x24",
+    "tag": "Testing"
+  }
+]
+```
+
+---
+
+## Notes
+
+- Use this command to monitor active sessions and their properties.
+- Combine with commands like `get` or `stop` for detailed session management.

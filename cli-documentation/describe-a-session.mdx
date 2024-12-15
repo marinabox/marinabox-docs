@@ -1,0 +1,49 @@
+The `get` command in MarinaBox CLI, referred to here as the "Describe Session" command, is used to retrieve detailed information about a specific active session using its session ID.
+
+---
+
+## Command Syntax
+
+```bash
+mb local get <SESSION_ID>
+```
+
+---
+
+## Description
+
+This command provides detailed information about a single active session, including:
+- **Session ID**: Unique identifier for the session.
+- **Environment Type**: Type of environment (`browser` or `desktop`).
+- **Status**: Current status of the session (`running`).
+- **Resolution**: Resolution of the sandbox environment.
+- **Tag**: Custom tag assigned to the session (if any).
+- **Runtime Seconds**: Total runtime of the session (in seconds).
+
+---
+
+## Example Usage
+
+### Retrieve Details for a Specific Session:
+```bash
+mb local get abc123xyz
+```
+
+#### Example Output:
+```json
+{
+  "session_id": "abc123xyz",
+  "env_type": "browser",
+  "status": "running",
+  "resolution": "1920x1080x24",
+  "tag": "Development",
+  "runtime_seconds": 3600
+}
+```
+
+---
+
+## Notes
+
+- Use the `session_id` obtained from the `list` command to ensure you're targeting the correct session.
+- This command is useful for monitoring or debugging a specific session.

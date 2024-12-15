@@ -1,0 +1,53 @@
+The `get-closed` command in MarinaBox CLI is used to retrieve detailed information about a specific closed session using its session ID.
+
+---
+
+## Command Syntax
+
+```bash
+mb local get-closed <SESSION_ID>
+```
+
+---
+
+## Description
+
+This command provides detailed information about a specific closed session, including:
+- **Session ID**: Unique identifier for the session.
+- **Environment Type**: Type of environment (`browser` or `desktop`).
+- **Status**: Final status of the session (`stopped`).
+- **Resolution**: Resolution of the sandbox environment.
+- **Tag**: Custom tag assigned to the session (if any).
+- **Runtime Seconds**: Total runtime of the session before it was stopped.
+- **Closed At**: Timestamp indicating when the session was stopped.
+- **Video Path**: Location of the session's recorded video (if available).
+
+---
+
+## Example Usage
+
+### Retrieve Details for a Specific Closed Session:
+```bash
+mb local get-closed xyz789abc
+```
+
+#### Example Output:
+```json
+{
+  "session_id": "xyz789abc",
+  "env_type": "browser",
+  "status": "stopped",
+  "resolution": "1920x1080x24",
+  "tag": "CompletedTask",
+  "runtime_seconds": 4500,
+  "closed_at": "2024-12-13T12:34:56Z",
+  "video_path": "/path/to/video/xyz789abc.mp4"
+}
+```
+
+---
+
+## Notes
+
+- Use the `session_id` from the `list-closed` command to retrieve information about a specific closed session.
+- This command is useful for auditing and reviewing past session details.
