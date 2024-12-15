@@ -5,7 +5,7 @@
     "dark": "/logo/logo.png",
     "light": "/logo/logo.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "modeToggle": {
     "default": "light",
     "isHidden": true
