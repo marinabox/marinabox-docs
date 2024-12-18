@@ -1,0 +1,31 @@
+---
+title: 'Set Anthropic API Key'
+description: 'Configure your Anthropic API key for Computer Use feature'
+---
+
+Before using MarinaBox's Computer Use feature, you need to configure your Anthropic API key. This key enables natural language processing capabilities for controlling your sandbox environment.
+
+## Command Syntax
+
+```bash
+mb local set --anthropic-api-key "API_KEY"
+```
+
+### Parameters
+- `API_KEY`: Your Anthropic API key obtained from the Anthropic dashboard
+
+## Example
+
+```bash
+mb local set --anthropic-api-key "sk-ant-xxxxx..."
+```
+
+## Expected Output
+
+Upon successful configuration:
+```json
+{
+  "status": "success",
+  "message": "Anthropic API key has been successfully configured"
+}
+```

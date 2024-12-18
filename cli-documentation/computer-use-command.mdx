@@ -1,0 +1,33 @@
+---
+title: 'Computer Use Command'
+description: 'Control your sandbox environment using natural language commands'
+---
+
+The Computer Use command allows you to control your sandboxed environment using natural language instructions. This feature leverages Claude's capabilities to interpret and execute commands within the sandbox.
+
+## Command Syntax
+
+```bash
+mb local computer-use "SESSION_ID_OR_TAG" --command "your natural language command"
+```
+
+### Parameters
+- `SESSION_ID_OR_TAG`: The unique identifier or tag of the target session
+- `--command`: The natural language instruction to execute
+
+## Examples
+
+### 1. Browser Control
+```bash
+mb local computer-use "TestSession" --command "maximize chromium window"
+```
+
+### 2. Web Navigation
+```bash
+mb local computer-use "abc123xyz" --command "navigate to github.com"
+```
+
+### 3. Complex Tasks
+```bash
+mb local computer-use "TestSession" --command "open a new tab, go to google.com, and search for 'MarinaBox documentation'"
+```

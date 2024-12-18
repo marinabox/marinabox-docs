@@ -21,14 +21,8 @@
   },
   "topbarCtaButton": {
     "name": "GitHub",
-    "url": "https://dashboard.marinabox.com"
+    "url": "https://github.com/orgs/marinabox/repositories"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "anchors": [
     {
       "name": "Documentation",
@@ -52,7 +46,9 @@
         "cli-documentation/describe-a-session",
         "cli-documentation/stop-a-session",
         "cli-documentation/list-closed-sessions",
-        "cli-documentation/tag-an-existing-session"
+        "cli-documentation/tag-an-existing-session",
+        "cli-documentation/set-anthropic-api-key",
+        "cli-documentation/computer-use-command"
       ]
     },
     {
@@ -69,6 +65,7 @@
     {
       "group": "Guides",
       "pages": [
+        "guides/computer-use",
         "guides/playwright-integration",
         "guides/live-session-view",
         "guides/embedding-iframe"
