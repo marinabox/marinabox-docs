@@ -1,0 +1,42 @@
+---
+title: 'Stop Session'
+description: 'Stop a running session using the MarinaBox SDK'
+---
+
+## Stop Session
+
+Stops a running session and moves it to the closed sessions list.
+
+### Python SDK
+
+```python
+from marinabox import MarinaboxSDK
+
+sdk = MarinaboxSDK()
+success = sdk.stop_session("abc123xyz")
+
+if success:
+    print("Session stopped successfully")
+else:
+    print("Failed to stop session")
+```
+
+### Behavior
+
+When stopping a session, the SDK performs the following actions:
+1. Gracefully stops the ffmpeg recording process
+2. Saves the session recording video file
+3. Stops and removes the Docker container
+4. Updates session status and calculates final runtime
+5. Moves session to closed sessions list
+
+### Error Handling
+
+```python
+try:
+    success = sdk.stop_session("abc123xyz")
+    if not success:
+        print("Failed to stop session")
+except Exception as e:
+    print(f"Error stopping session: {e}")
+```

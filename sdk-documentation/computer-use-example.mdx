@@ -1,0 +1,55 @@
+---
+title: 'Computer Use Example'
+description: 'Execute natural language commands to control the browser or desktop session.'
+---
+
+
+
+### Python SDK
+
+```python
+from marinabox import MarinaboxSDK
+
+# Initialize the SDK
+sdk = MarinaboxSDK()
+
+# Set your Anthropic API key (required for computer use commands)
+sdk.set_anthropic_key("your-anthropic-api-key")
+
+# Create a new session
+session = sdk.create_session(env_type="browser", tag="my-session")
+
+# Execute a computer use command (can use session ID or tag)
+sdk.computer_use_command("my-session", "Navigate to https://x.ai")
+```
+
+### Example Commands
+
+```python
+# Using session ID
+sdk.computer_use_command("abc123xyz", "Click the login button")
+
+# Using session tag
+sdk.computer_use_command("my-session", "Fill out the contact form")
+
+# Complex interactions
+sdk.computer_use_command("my-session", "Search for 'Python tutorials' on Google")
+```
+
+### Error Handling
+
+```python
+try:
+    sdk.computer_use_command("my-session", "Navigate to website")
+except ValueError as e:
+    print(f"Error: {e}")  # Handles missing API key or session not found
+except Exception as e:
+    print(f"Failed to execute command: {e}")
+```
+
+### Notes
+
+- Requires an Anthropic API key to be set using `set_anthropic_key()`
+- Can identify sessions by either session ID or tag
+- Commands should be clear and specific natural language instructions
+- Works with both browser and desktop environment types

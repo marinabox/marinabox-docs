@@ -39,6 +39,18 @@
       ]
     },
     {
+      "group": "SDK Documentation",
+      "pages": [
+        "sdk-documentation/create-a-session",
+        "sdk-documentation/list-active-sessions",
+        "sdk-documentation/describe-a-session",
+        "sdk-documentation/stop-a-session",
+        "sdk-documentation/list-closed-sessions",
+        "sdk-documentation/tag-an-existing-session",
+        "sdk-documentation/computer-use-example"
+      ]
+    },
+    {
       "group": "CLI Documentation",
       "pages": [
         "cli-documentation/create-a-session",
@@ -49,17 +61,6 @@
         "cli-documentation/tag-an-existing-session",
         "cli-documentation/set-anthropic-api-key",
         "cli-documentation/computer-use-command"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-documentation/create-a-session",
-        "api-documentation/list-active-sessions",
-        "api-documentation/describe-a-session",
-        "api-documentation/stop-a-session",
-        "api-documentation/list-closed-sessions",
-        "api-documentation/tag-an-existing-session"
       ]
     },
     {

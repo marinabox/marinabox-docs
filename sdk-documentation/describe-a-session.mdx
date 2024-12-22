@@ -1,0 +1,52 @@
+---
+title: 'Get Session Details'
+description: 'Retrieve details for a specific session using the MarinaBox SDK'
+---
+
+## Get Session Details
+
+Retrieves detailed information about a specific active session.
+
+### Python SDK
+
+```python
+from marinabox import MarinaboxSDK
+
+sdk = MarinaboxSDK()
+
+# Get session by ID
+session = sdk.get_session("abc123xyz")
+
+# Get session by ID or tag
+session = sdk.get_session_by_identifier("abc123xyz")  # tries ID first
+session = sdk.get_session_by_identifier("Development")  # then tries tag
+```
+
+### Response Object
+
+The method returns a `BrowserSession` object with the following attributes:
+
+```python
+{
+    "session_id": "abc123xyz",
+    "container_id": "abc123xyz789",
+    "vnc_port": 5002,
+    "created_at": "2024-12-14T10:30:00Z",
+    "env_type": "browser",
+    "debug_port": 4002,
+    "status": "running",
+    "runtime_seconds": 3600,
+    "tag": "Development"
+}
+```
+
+### Error Handling
+
+```python
+try:
+    session = sdk.get_session("nonexistent-id")
+    if session is None:
+        print("Session not found")
+except Exception as e:
+    print(f"Error retrieving session: {e}")
+```

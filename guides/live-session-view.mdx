@@ -1,36 +1,41 @@
 ---
 title: 'Live Session Viewing'
-description: 'View live MarinaBox sessions in your browser'
+description: 'View live MarinaBox sessions using the SDK'
 ---
 
-MarinaBox provides VNC-based live viewing capabilities for all sessions. You can view sessions directly in your browser.
+## Live Session Viewing
 
-## Getting Session VNC Port
+MarinaBox provides VNC-based live viewing capabilities for all sessions. You can get session details using the SDK and view them in your browser.
 
-First, list your active sessions to get the VNC port:
+### Python SDK
 
-```bash
-mb local list
+```python
+from marinabox import MarinaboxSDK
+
+sdk = MarinaboxSDK()
+
+# Get session details
+session = sdk.get_session("abc123xyz")
+vnc_port = session.vnc_port
+
+print(f"View session at: http://localhost:{vnc_port}")
 ```
 
-You'll see output like this:
+### Example Output
 
-```json
+```python
 {
-  "session_id": "a963accd3608",
-  "vnc_port": 5004,
-  "status": "running",
-  "resolution": "1200x800x24"
-  // ... other fields
+    "session_id": "abc123xyz",
+    "vnc_port": 5004,
+    "status": "running",
+    "resolution": "1200x800x24"
+    # ... other fields
 }
 ```
 
-## Direct Browser Viewing
+### Direct Browser Viewing
 
-To view a session directly in your browser:
-
-1. Note the `vnc_port` from the session details (e.g., `5004`)
-2. Open your browser and navigate to:
+Once you have the VNC port, open your browser and navigate to:
 ```
-http://localhost:5004
+http://localhost:{vnc_port}
 ```

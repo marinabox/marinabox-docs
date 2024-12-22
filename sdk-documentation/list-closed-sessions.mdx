@@ -1,0 +1,50 @@
+---
+title: 'List Closed Sessions'
+description: 'Retrieve all closed sessions using the MarinaBox SDK'
+---
+
+## List Closed Sessions
+
+Returns a list of all sessions that have been stopped.
+
+### Python SDK
+
+```python
+from marinabox import MarinaboxSDK
+
+sdk = MarinaboxSDK()
+closed_sessions = sdk.list_closed_sessions()  # Returns List[BrowserSession]
+
+# Print closed session details
+for session in closed_sessions:
+    print(f"Session ID: {session.session_id}")
+    print(f"Runtime: {session.runtime_seconds} seconds")
+    print(f"Video Path: {session.video_path}")
+```
+
+### Response Objects
+
+The method returns a list of `BrowserSession` objects, each containing:
+
+```python
+{
+    "session_id": "xyz789abc",
+    "container_id": "xyz789abc456",
+    "created_at": "2024-12-13T10:00:00Z",
+    "closed_at": "2024-12-13T12:34:56Z",
+    "env_type": "browser",
+    "status": "stopped",
+    "runtime_seconds": 4500,
+    "video_path": "/path/to/video/xyz789abc.mp4",
+    "tag": "CompletedTask"
+}
+```
+
+### Error Handling
+
+```python
+try:
+    closed_sessions = sdk.list_closed_sessions()
+except Exception as e:
+    print(f"Failed to list closed sessions: {e}")
+```

@@ -1,0 +1,50 @@
+---
+title: 'Get Closed Session Details'
+description: 'Retrieve details for a closed session using the MarinaBox SDK'
+---
+
+## Get Closed Session Details
+
+Retrieves detailed information about a specific closed session.
+
+### Python SDK
+
+```python
+from marinabox import MarinaboxSDK
+
+sdk = MarinaboxSDK()
+closed_session = sdk.get_closed_session("xyz789abc")
+
+if closed_session:
+    print(f"Session ID: {closed_session.session_id}")
+    print(f"Runtime: {closed_session.runtime_seconds} seconds")
+    print(f"Video Path: {closed_session.video_path}")
+```
+
+### Response Object
+
+The method returns a `BrowserSession` object with the following attributes:
+
+```python
+{
+    "session_id": "xyz789abc",
+    "env_type": "browser",
+    "status": "stopped",
+    "resolution": "1920x1080x24",
+    "tag": "CompletedTask",
+    "runtime_seconds": 4500,
+    "closed_at": "2024-12-13T12:34:56Z",
+    "video_path": "/path/to/video/xyz789abc.mp4"
+}
+```
+
+### Error Handling
+
+```python
+try:
+    session = sdk.get_closed_session("nonexistent-id")
+    if session is None:
+        print("Closed session not found")
+except Exception as e:
+    print(f"Error retrieving closed session: {e}")
+```

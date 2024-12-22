@@ -1,0 +1,51 @@
+---
+title: 'Create Session'
+description: 'Create a new sandbox session using the MarinaBox SDK'
+---
+
+## Create a New Session
+
+Creates a new sandbox session with specified environment type and configuration using the MarinaBox SDK.
+
+### Python SDK
+
+```python
+from marinabox import MarinaboxSDK
+
+sdk = MarinaboxSDK()
+session = sdk.create_session(
+    env_type="browser",      # Optional: 'browser' or 'desktop', defaults to 'browser'
+    resolution="1280x800x24", # Optional: format 'WIDTHxHEIGHTxDEPTH'
+    tag="Development"        # Optional: custom tag for the session
+)
+```
+
+### Response Object
+
+The method returns a `BrowserSession` object with the following attributes:
+
+```python
+{
+    "session_id": "abc123xyz",        # Unique identifier for the session
+    "container_id": "abc123xyz789",   # Docker container ID
+    "vnc_port": 5002,                 # Port number for VNC connection
+    "created_at": "2024-12-14T10:30:00Z",  # Creation timestamp
+    "env_type": "browser",            # Environment type
+    "debug_port": 4002,               # Debug port (browser only)
+    "status": "running",              # Session status
+    "resolution": "1280x800x24",      # Screen resolution
+    "tag": "Development",             # Custom tag
+    "websocket_url": "ws://localhost:4002/devtools/browser/abc123xyz"  # Browser debugging URL
+}
+```
+
+### Error Handling
+
+```python
+try:
+    session = sdk.create_session(env_type="invalid")
+except ValueError as e:
+    print(f"Invalid environment type: {e}")
+except Exception as e:
+    print(f"Failed to create session: {e}")
+```

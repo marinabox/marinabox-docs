@@ -1,0 +1,50 @@
+---
+title: 'Update Session Tag'
+description: 'Update the tag for a session using the MarinaBox SDK'
+---
+
+## Update Session Tag
+
+Updates or adds a tag to a specific session. Works for both active and closed sessions.
+
+### Python SDK
+
+```python
+from marinabox import MarinaboxSDK
+
+sdk = MarinaboxSDK()
+session = sdk.update_tag("abc123xyz", "NewTag")
+
+if session:
+    print(f"Session {session.session_id} updated with tag: {session.tag}")
+else:
+    print("Session not found")
+```
+
+### Response Object
+
+The method returns an updated `BrowserSession` object:
+
+```python
+{
+    "session_id": "abc123xyz",
+    "container_id": "abc123xyz789",
+    "vnc_port": 5002,
+    "created_at": "2024-12-14T10:30:00Z",
+    "env_type": "browser",
+    "debug_port": 4002,
+    "status": "running",
+    "tag": "NewTag"
+}
+```
+
+### Error Handling
+
+```python
+try:
+    session = sdk.update_tag("nonexistent-id", "NewTag")
+    if session is None:
+        print("Session not found")
+except Exception as e:
+    print(f"Error updating tag: {e}")
+```
