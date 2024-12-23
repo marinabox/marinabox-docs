@@ -30,7 +30,7 @@ Install the MarinaBox Python package using pip:
 pip install marinabox
 ```
 
-## Architecture Note
+## Important Note
 
 The provided Docker images are built for Mac ARM64 architecture (Apple Silicon). If you're using a different architecture, follow these steps:
 
@@ -41,34 +41,6 @@ git clone https://github.com/marinabox/marinabox-sandbox
 
 2. Build the images for your target platform:
 ```bash
-docker build --platform <your-platform> -t marinabox/marinabox-browser .
-docker build --platform <your-platform> -t marinabox/marinabox-desktop .
+docker build --platform <your-platform> -f Dockerfile.chromium -t marinabox/marinabox-browser .
+docker build --platform <your-platform> -f Dockerfile.desktop -t marinabox/marinabox-desktop .
 ```
-
-## Quick Start Example
-
-Here's a simple example to verify your installation:
-
-```python
-from marinabox import MarinaboxSDK
-
-# Initialize the SDK
-mb = MarinaboxSDK()
-
-# Create a new session
-session = mb.create_session(env_type="browser", tag="my-session")
-print(f"Created session: {session.session_id}")
-
-# List active sessions
-sessions = mb.list_sessions()
-for s in sessions:
-    print(f"Active session: {s.session_id} (Tag: {s.tag})")
-```
-
-<Note>
-For Computer Use functionality, you'll need to set your Anthropic API key:
-
-```python
-mb.set_anthropic_key(ANTHROPIC_API_KEY)
-```
-</Note>

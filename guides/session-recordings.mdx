@@ -1,0 +1,35 @@
+---
+title: 'Session Recordings'
+description: 'View and manage recordings of your MarinaBox sessions'
+---
+
+# Session Recordings
+
+MarinaBox automatically records all sessions, allowing you to review browser interactions after a session has ended. These recordings are stored locally and can be accessed using standard media players.
+
+## Finding Recording Files
+
+To locate the recording for a specific session, first list your closed sessions:
+
+```bash
+mb local list-closed
+```
+
+This will return an array of closed sessions with their details, including the video path:
+
+```json
+{
+  "session_id": "f730cc137deb",
+  "video_path": "/Users/username/.marinabox/videos/f730cc137deb.mp4",
+  "status": "stopped",
+  // ... other fields
+}
+```
+
+## Video File Location
+
+By default, recordings are stored in:
+- macOS/Linux: `~/.marinabox/videos/`
+- Windows: `%USERPROFILE%\.marinabox\videos\`
+
+Each recording is named using the session ID (e.g., `f730cc137deb.mp4`).

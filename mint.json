@@ -66,10 +66,10 @@
     {
       "group": "Guides",
       "pages": [
-        "guides/computer-use",
         "guides/playwright-integration",
         "guides/live-session-view",
-        "guides/embedding-iframe"
+        "guides/embedding-iframe",
+        "guides/session-recordings"
       ]
     }
   ],
