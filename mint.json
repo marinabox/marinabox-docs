@@ -64,6 +64,12 @@
       ]
     },
     {
+      "group": "Playground UI",
+      "pages": [
+        "playground-ui/coming-soon"
+      ]
+    },
+    {
       "group": "Guides",
       "pages": [
         "guides/playwright-integration",
