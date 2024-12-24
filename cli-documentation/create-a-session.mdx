@@ -17,7 +17,7 @@ The `create` command in MarinaBox CLI is used to create a new session in a secur
 ## Command Syntax
 
 ```bash
-mb local create --env-type=<browser|desktop> [--resolution=<WIDTHxHEIGHTxDEPTH>] [--tag=<TAG>]
+mb local create --env-type=<browser|desktop> [--tag=<TAG>]
 ```
 
 ### Options:
@@ -38,10 +38,8 @@ This creates a browser session with default resolution and no tag.
 
 ### 2. Create a Desktop Session with Custom Resolution
 ```bash
-mb local create --env-type=desktop --resolution=1920x1080x24
+mb local create --env-type=desktop
 ```
-This creates a desktop session with a resolution of 1920x1080 and a depth of 24.
-
 ---
 
 ### 3. Create a Tagged Session
