@@ -1,0 +1,133 @@
+---
+title: 'LangGraph Computer Use'
+description: 'Create AI agents that can use computers with LangGraph and MarinaBox'
+---
+
+# LangGraph Integration
+
+MarinaBox can be integrated with LangGraph to create AI agents that can interact with isolated desktop environments. This guide shows you how to set up MarinaBox as a Computer Tool for LangGraph agents.
+
+## Prerequisites
+
+- MarinaBox installed and configured
+- Python 3.8+
+- Anthropic API key for Claude
+
+## Basic Setup
+
+First, install the required dependencies:
+
+```bash
+pip install marinabox langgraph langchain-anthropic
+```
+
+Set up your Anthropic API key:
+
+```python
+import os
+os.environ['ANTHROPIC_API_KEY'] = "your-anthropic-api-key"
+```
+
+## Creating the Workflow
+
+Here's a complete example showing how to create a LangGraph workflow with MarinaBox:
+
+```python
+from marinabox import mb_start_computer, mb_stop_computer, mb_use_computer_tool
+from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.tools import tool
+from langgraph.prebuilt import ToolNode
+from langgraph.graph import StateGraph, START, END
+from langchain_anthropic import ChatAnthropic
+from typing import Annotated, Literal
+from langgraph.types import Command
+
+# Set up tools and model
+tools = [mb_use_computer_tool]
+tool_node = ToolNode(tools=tools)
+model_with_tools = ChatAnthropic(
+    model="claude-3-5-sonnet-20241022", 
+    temperature=0
+).bind_tools(tools)
+
+# Define workflow logic
+def should_continue(state: Annotated[dict, InjectedState()]):
+    messages = state["messages"]
+    if len(messages) > 0:
+        last_message = messages[-1]
+        if last_message.tool_calls:
+            return Command(goto="tool_node")
+    return Command(goto="stop_computer")
+
+def call_model(state: Annotated[dict, InjectedState()]):
+    input_message = input("Enter your message: ")
+    if input_message != "stop_computer":
+        messages = [HumanMessage(content=input_message)]
+        response = model_with_tools.invoke(messages)
+        return {
+            "messages": [response], 
+            "session_id": state.get("session_id")
+        }
+    return {
+        "messages": [], 
+        "session_id": state.get("session_id")
+    }
+
+# Create workflow
+workflow = StateGraph(dict)
+
+# Add nodes
+workflow.add_node("start_computer", mb_start_computer)
+workflow.add_node("agent", call_model)
+workflow.add_node("tool_node", tool_node)
+workflow.add_node("stop_computer", mb_stop_computer)
+workflow.add_node("should_continue", should_continue)
+
+# Add edges
+workflow.add_edge(START, "start_computer")
+workflow.add_edge("start_computer", "agent")
+workflow.add_edge("tool_node", "agent")
+workflow.add_edge("agent", "should_continue")
+workflow.add_edge("stop_computer", END)
+
+# Compile and run
+app = workflow.compile()
+app.invoke({"messages": ""})
+```
+
+MarinaBox provides three key LangGraph components:
+
+- `mb_start_computer`: A LangGraph node that initializes and starts up an isolated desktop environment
+- `mb_stop_computer`: A LangGraph node that safely shuts down the desktop session
+- `mb_use_computer_tool`: A LangGraph tool that enables agents to interact with the desktop using natural language commands
+
+## How It Works
+
+1. **Start Computer Node**: The workflow begins with the `mb_start_computer` node, which creates and initializes an isolated desktop environment
+2. **Computer Control Tool**: The agent uses the `mb_use_computer_tool` to send natural language commands to control the desktop
+3. **Stop Computer Node**: When finished, the `mb_stop_computer` node ensures proper cleanup and shutdown of the session
+
+## Monitoring Sessions
+
+You can monitor the desktop session in your browser using the VNC port provided by MarinaBox. For embedding the live view in your application, see our [Embedding Guide](/guides/embedding-iframe).
+
+## Example Usage
+
+Here's a sample interaction with the agent:
+
+```bash
+Enter your message: Please open Google Chrome and search for "LangGraph documentation"
+# Agent will use the computer to:
+# 1. Open Chrome
+# 2. Navigate to Google
+# 3. Search for LangGraph documentation
+
+Enter your message: stop_computer
+# This will cleanly shut down the session
+```
+
+---
+
+### Get Support & Join Our Community
+* Discord: https://discord.gg/nAyFBSSU87
+* Email: askmarinabox@gmail.com

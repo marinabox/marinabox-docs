@@ -1,0 +1,133 @@
+---
+title: 'LangGraph Browser Use'
+description: 'Create AI agents that can use web browsers with LangGraph and MarinaBox'
+---
+
+# LangGraph Integration
+
+MarinaBox can be integrated with LangGraph to create AI agents that can interact with isolated web browsers. This guide shows you how to set up MarinaBox as a Browser Tool for LangGraph agents.
+
+## Prerequisites
+
+- MarinaBox installed and configured
+- Python 3.8+
+- Anthropic API key for Claude
+
+## Basic Setup
+
+First, install the required dependencies:
+
+```bash
+pip install marinabox langgraph langchain-anthropic
+```
+
+Set up your Anthropic API key:
+
+```python
+import os
+os.environ['ANTHROPIC_API_KEY'] = "your-anthropic-api-key"
+```
+
+## Creating the Workflow
+
+Here's a complete example showing how to create a LangGraph workflow with MarinaBox:
+
+```python
+from marinabox import mb_start_browser, mb_stop_browser, mb_use_browser_tool
+from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.tools import tool
+from langgraph.prebuilt import ToolNode
+from langgraph.graph import StateGraph, START, END
+from langchain_anthropic import ChatAnthropic
+from typing import Annotated, Literal
+from langgraph.types import Command
+
+# Set up tools and model
+tools = [mb_use_browser_tool]
+tool_node = ToolNode(tools=tools)
+model_with_tools = ChatAnthropic(
+    model="claude-3-5-sonnet-20241022", 
+    temperature=0
+).bind_tools(tools)
+
+# Define workflow logic
+def should_continue(state: Annotated[dict, InjectedState()]):
+    messages = state["messages"]
+    if len(messages) > 0:
+        last_message = messages[-1]
+        if last_message.tool_calls:
+            return Command(goto="tool_node")
+    return Command(goto="stop_browser")
+
+def call_model(state: Annotated[dict, InjectedState()]):
+    input_message = input("Enter your message: ")
+    if input_message != "stop_browser":
+        messages = [HumanMessage(content=input_message)]
+        response = model_with_tools.invoke(messages)
+        return {
+            "messages": [response], 
+            "session_id": state.get("session_id")
+        }
+    return {
+        "messages": [], 
+        "session_id": state.get("session_id")
+    }
+
+# Create workflow
+workflow = StateGraph(dict)
+
+# Add nodes
+workflow.add_node("start_browser", mb_start_browser)
+workflow.add_node("agent", call_model)
+workflow.add_node("tool_node", tool_node)
+workflow.add_node("stop_browser", mb_stop_browser)
+workflow.add_node("should_continue", should_continue)
+
+# Add edges
+workflow.add_edge(START, "start_browser")
+workflow.add_edge("start_browser", "agent")
+workflow.add_edge("tool_node", "agent")
+workflow.add_edge("agent", "should_continue")
+workflow.add_edge("stop_browser", END)
+
+# Compile and run
+app = workflow.compile()
+app.invoke({"messages": ""})
+```
+
+MarinaBox provides three key LangGraph components:
+
+- `mb_start_browser`: A LangGraph node that initializes and starts up an isolated browser session
+- `mb_stop_browser`: A LangGraph node that safely closes the browser session
+- `mb_use_browser_tool`: A LangGraph tool that enables agents to interact with the browser using natural language commands
+
+## How It Works
+
+1. **Start Browser Node**: The workflow begins with the `mb_start_browser` node, which creates and initializes an isolated browser session
+2. **Browser Control Tool**: The agent uses the `mb_use_browser_tool` to send natural language commands to control the browser
+3. **Stop Browser Node**: When finished, the `mb_stop_browser` node ensures proper cleanup and closure of the session
+
+## Monitoring Sessions
+
+You can monitor the browser session in real-time using the VNC port provided by MarinaBox. For embedding the live view in your application, see our [Embedding Guide](/guides/embedding-iframe).
+
+## Example Usage
+
+Here's a sample interaction with the agent:
+
+```bash
+Enter your message: Please search for "LangGraph documentation" on Google
+# Agent will:
+# 1. Navigate to Google
+# 2. Search for LangGraph documentation
+# 3. Display the results
+
+Enter your message: stop_browser
+# This will cleanly close the browser session
+```
+
+---
+
+### Get Support & Join Our Community
+* Discord: https://discord.gg/nAyFBSSU87
+* Email: askmarinabox@gmail.com

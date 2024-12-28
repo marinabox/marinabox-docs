@@ -72,6 +72,8 @@
     {
       "group": "Guides",
       "pages": [
+        "guides/langgraph-computer-use",
+        "guides/langgraph-browser-use",
         "guides/playwright-integration",
         "guides/live-session-view",
         "guides/embedding-iframe",
