@@ -1,0 +1,58 @@
+---
+title: 'Custom Video Save Locations'
+description: 'Configure custom paths and filenames for session recordings'
+---
+
+## Custom Video Save Locations
+
+Configure where and how session recordings are saved.
+
+### Python SDK
+
+```python
+from marinabox import MarinaboxSDK
+
+# Initialize SDK with custom videos directory
+sdk = MarinaboxSDK(videos_path="/path/to/videos")
+
+# Create and use a session
+session = sdk.create_session(env_type="browser")
+
+# Stop session with custom video filename
+sdk.stop_session(session.session_id, video_filename="custom_name.mp4")
+```
+
+### Configuration Options
+
+The SDK provides two ways to customize video saving:
+
+1. **Global Videos Directory**:
+   - Set during SDK initialization
+   - All session recordings will save to this directory by default
+
+2. **Custom Filename**:
+   - Specify when stopping a session
+   - Allows unique naming for individual recordings
+
+### Example Usage
+
+```python
+# Example with both custom directory and filename
+sdk = MarinaboxSDK(videos_path="/home/user/session-recordings")
+session = sdk.create_session(tag="important-test")
+
+# Later, stop the session with custom filename
+sdk.stop_session(session.session_id, video_filename="test-run-001.mp4")
+```
+
+### Notes
+
+- If no custom `videos_path` is specified, recordings save to the default MarinaBox videos directory
+- Custom filenames must end with `.mp4`
+- Existing files with the same name will be overwritten
+
+---
+
+### Get Support & Join Our Community
+* Discord: https://discord.gg/nAyFBSSU87
+* Email: askmarinabox@gmail.com

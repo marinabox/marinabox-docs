@@ -1,0 +1,76 @@
+The `stop` command in MarinaBox CLI supports custom video saving options, allowing you to specify where and how session recordings are saved.
+
+---
+
+## Command Syntax
+
+```bash
+mb local stop <SESSION_ID> [--video-dir <PATH>] [--video-filename <FILENAME>]
+```
+
+### Options:
+- `--video-dir`: (Optional) Specifies a custom directory to save the session recording
+- `--video-filename`: (Optional) Sets a custom filename for the session recording
+
+---
+
+## Description
+
+When stopping a session, you can customize how the recording is saved:
+1. **Custom Directory**: Specify where to save the video file
+2. **Custom Filename**: Choose a specific name for the video file
+3. **Both Combined**: Full control over the video file location and name
+
+---
+
+## Example Usage
+
+### Save to Custom Directory:
+```bash
+mb local stop abc123xyz --video-dir /home/user/recordings
+```
+
+### Use Custom Filename:
+```bash
+mb local stop abc123xyz --video-filename test-session-001.mp4
+```
+
+### Custom Directory and Filename:
+```bash
+mb local stop abc123xyz --video-dir /home/user/recordings --video-filename test-session-001.mp4
+```
+
+#### Example Output:
+```bash
+Session stopped successfully
+Video saved to: /home/user/recordings/test-session-001.mp4
+```
+
+---
+
+## Configuration Options
+
+1. **Video Directory (`--video-dir`)**:
+   - Accepts absolute paths
+   - Directory must exist and be writable
+   - If not specified, uses default MarinaBox videos directory
+
+2. **Video Filename (`--video-filename`)**:
+   - Must end with `.mp4`
+   - If not specified, uses session ID as filename
+   - Special characters are allowed but not recommended
+
+---
+
+## Notes
+
+- Custom filenames must end with `.mp4`
+- Existing files with the same name will be overwritten
+- Directory paths should be absolute to avoid confusion
+- Both options can be used independently or together
+
+---
+
+### Get Support & Join Our Community
+* Discord: https://discord.gg/nAyFBSSU87
+* Email: askmarinabox@gmail.com
