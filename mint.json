@@ -47,6 +47,7 @@
         "sdk-documentation/stop-a-session",
         "sdk-documentation/list-closed-sessions",
         "sdk-documentation/tag-an-existing-session",
+        "sdk-documentation/save-video-to-custom-path",
         "sdk-documentation/computer-use-example"
       ]
     },
@@ -60,6 +61,7 @@
         "cli-documentation/list-closed-sessions",
         "cli-documentation/tag-an-existing-session",
         "cli-documentation/set-anthropic-api-key",
+        "cli-documentation/save-video-to-custom-path",
         "cli-documentation/computer-use-command"
       ]
     },
