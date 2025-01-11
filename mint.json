@@ -81,6 +81,12 @@
         "guides/embedding-iframe",
         "guides/session-recordings"
       ]
+    },
+    {
+      "group": "Blogs",
+      "pages": [
+        "blogs/all-articles"
+      ]
     }
   ],
   "footerSocials": {
