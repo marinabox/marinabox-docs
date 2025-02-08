@@ -17,7 +17,7 @@ The `create` command in MarinaBox CLI is used to create a new session in a secur
 ## Command Syntax
 
 ```bash
-mb local create --env-type=<browser|desktop> [--tag=<TAG>]
+mb local create --env-type=<browser|desktop> [--tag=<TAG>] [--kiosk]
 ```
 
 ### Options:
@@ -25,6 +25,7 @@ mb local create --env-type=<browser|desktop> [--tag=<TAG>]
   - `browser`: Creates a sandboxed browser environment.
   - `desktop`: Creates a sandboxed desktop environment.
 - `--tag`: (Optional) Assigns a custom tag to the session for easier identification.
+- `--kiosk`: (Optional) Launches Chrome in kiosk mode (browser environment only). Removes tab controls and runs in fullscreen.
 
 ## Examples
 
@@ -34,19 +35,22 @@ mb local create --env-type=browser
 ```
 This creates a browser session with default resolution and no tag.
 
----
-
 ### 2. Create a Desktop Session with Custom Resolution
 ```bash
 mb local create --env-type=desktop
 ```
----
 
 ### 3. Create a Tagged Session
 ```bash
 mb local create --env-type=desktop --tag=TestSession
 ```
 This creates a desktop session with a custom tag `TestSession`.
+
+### 4. Create a Kiosk Mode Browser Session
+```bash
+mb local create --env-type=browser --kiosk
+```
+This creates a browser session in kiosk mode, ideal for presentations or public displays.
 
 ---
 
