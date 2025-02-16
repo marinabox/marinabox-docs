@@ -16,14 +16,16 @@ sdk = MarinaboxSDK()
 session = sdk.create_session(
     env_type="browser",      # Optional: 'browser' or 'desktop', defaults to 'browser'
     tag="Development",       # Optional: custom tag for the session
-    kiosk=False             # Optional: launch Chrome in kiosk mode (browser only)
+    kiosk=False,            # Optional: launch Chrome in kiosk mode (browser only)
+    initial_url="https://example.com"  # Optional: initial URL to open (browser only)
 )
 
-# Example: Create a kiosk mode browser session
+# Example: Create a kiosk mode browser session with initial URL
 kiosk_session = sdk.create_session(
     env_type="browser",
     tag="Kiosk Display",
-    kiosk=True
+    kiosk=True,
+    initial_url="https://dashboard.example.com"
 )
 ```
 
@@ -48,11 +50,12 @@ The method returns a `BrowserSession` object with the following attributes:
 
 ### Parameters
 
-| Parameter  | Type    | Required | Description                                                |
-|-----------|---------|----------|------------------------------------------------------------|
-| env_type  | str     | No       | Environment type ('browser' or 'desktop'). Default: 'browser' |
-| tag       | str     | No       | Custom tag for the session                                 |
-| kiosk     | bool    | No       | Launch Chrome in kiosk mode (browser only). Default: False |
+| Parameter   | Type    | Required | Description                                                |
+|------------|---------|----------|------------------------------------------------------------|
+| env_type   | str     | No       | Environment type ('browser' or 'desktop'). Default: 'browser' |
+| tag        | str     | No       | Custom tag for the session                                 |
+| kiosk      | bool    | No       | Launch Chrome in kiosk mode (browser only). Default: False |
+| initial_url | str     | No       | Initial URL to open when browser starts (browser only)     |
 
 ### Error Handling
 
